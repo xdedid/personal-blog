@@ -1,13 +1,20 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+import HomeLayout from './HomeLayout.vue'
 
 const { Layout: DefaultLayout } = DefaultTheme
-const { frontmatter } = useData()
+const { frontmatter, page } = useData()
+
+const isHomePage = computed(() => {
+  return page.value.relativePath === 'index.md' || page.value.relativePath === ''
+})
 </script>
 
 <template>
-  <DefaultLayout>
+  <HomeLayout v-if="isHomePage" />
+  <DefaultLayout v-else>
     <template #home-hero-after>
       <div class="blog-announcement">
         <p>Welcome to my personal blog!</p>

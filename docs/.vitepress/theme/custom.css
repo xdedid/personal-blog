@@ -36,3 +36,56 @@
   align-items: center;
   gap: 0.25rem;
 }
+
+/* Fullpage scroll container */
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Home layout fullpage scroll */
+.home-layout {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.fullpage-scroll {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* Scroll snap sections */
+.splash-section,
+.blog-showcase {
+  scroll-snap-align: start;
+  min-height: 100vh;
+}
+
+/* Smooth scroll for non-home pages */
+.vp-doc {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .fullpage-scroll {
+    scroll-behavior: auto;
+  }
+
+  .splash-content {
+    transition: none;
+  }
+
+  .scroll-indicator {
+    animation: none;
+  }
+}
