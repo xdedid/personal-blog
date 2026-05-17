@@ -36,7 +36,6 @@ const recentPosts = posts.slice(0, 3)
   align-items: center;
   justify-content: center;
   padding: 4rem 2rem;
-  background: #fafafa;
 }
 
 .content {
@@ -50,7 +49,6 @@ const recentPosts = posts.slice(0, 3)
   font-weight: 600;
   color: #111;
   margin: 0 0 3rem 0;
-  letter-spacing: -0.01em;
 }
 
 .posts-grid {
@@ -60,7 +58,7 @@ const recentPosts = posts.slice(0, 3)
 }
 
 .post-card {
-  background: white;
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 12px;
   padding: 1.5rem;
   border: 1px solid #e5e7eb;
@@ -87,7 +85,6 @@ const recentPosts = posts.slice(0, 3)
   font-size: 1.125rem;
   font-weight: 600;
   margin: 0 0 0.5rem 0;
-  line-height: 1.4;
 }
 
 .post-title a {
@@ -137,17 +134,11 @@ const recentPosts = posts.slice(0, 3)
   padding: 0.75rem 1.5rem;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.2s;
 }
 
 .view-all:hover {
-  background: #f3f4f6;
-  border-color: #d1d5db;
-}
-
-/* 暗色模式 */
-:root.dark .blog-showcase {
-  background: #111118;
+  background: rgba(0, 0, 0, 0.05);
 }
 
 :root.dark .section-title {
@@ -155,13 +146,12 @@ const recentPosts = posts.slice(0, 3)
 }
 
 :root.dark .post-card {
-  background: #1a1a24;
+  background: rgba(26, 26, 36, 0.8);
   border-color: #2a2a3a;
 }
 
 :root.dark .post-card:hover {
   border-color: #3a3a4a;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 :root.dark .post-title a {
@@ -170,10 +160,6 @@ const recentPosts = posts.slice(0, 3)
 
 :root.dark .post-title a:hover {
   color: #818cf8;
-}
-
-:root.dark .post-excerpt {
-  color: #9ca3af;
 }
 
 :root.dark .post-link {
@@ -186,8 +172,7 @@ const recentPosts = posts.slice(0, 3)
 }
 
 :root.dark .view-all:hover {
-  background: #1a1a24;
-  border-color: #3a3a4a;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 @media (max-width: 768px) {
@@ -198,10 +183,6 @@ const recentPosts = posts.slice(0, 3)
   .section-title {
     font-size: 1.25rem;
     margin-bottom: 2rem;
-  }
-
-  .posts-grid {
-    grid-template-columns: 1fr;
   }
 }
 </style>
