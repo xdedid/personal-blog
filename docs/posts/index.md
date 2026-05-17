@@ -1,5 +1,5 @@
 ---
-title: Blog Posts
+title: 文章列表
 layout: doc
 ---
 
@@ -7,6 +7,6 @@ layout: doc
 import PostList from '../.vitepress/theme/PostList.vue'
 </script>
 
-# Blog Posts
+# 文章列表
 
 <PostList />

@@ -1,21 +1,21 @@
 ---
 layout: home
 hero:
-  name: My Blog
-  text: Personal thoughts and tutorials
-  tagline: A developer's journey
+  name: 我的博客
+  text: 个人思考与技术分享
+  tagline: 一个开发者的成长之路
   actions:
     - theme: brand
-      text: Read Posts
+      text: 阅读文章
       link: /posts/
     - theme: alt
-      text: About Me
+      text: 关于我
       link: /about
 features:
-  - title: Articles
-    details: Technical tutorials and insights
-  - title: Open Source
-    details: Projects and contributions
-  - title: Learning
-    details: Notes and discoveries
+  - title: 技术文章
+    details: 技术教程与经验分享
+  - title: 开源项目
+    details: 项目实践与贡献
+  - title: 学习笔记
+    details: 知识记录与发现
 ---

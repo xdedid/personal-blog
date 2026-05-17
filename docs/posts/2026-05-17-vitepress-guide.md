@@ -1,46 +1,46 @@
 ---
-title: Getting Started with VitePress
+title: VitePress 入门指南
 date: 2026-05-17
 categories:
-  - Tutorial
+  - 教程
 tags:
   - vitepress
   - vue
-  - static-site
+  - 静态站点
 ---
 
-# Getting Started with VitePress
+# VitePress 入门指南
 
-VitePress is a powerful static site generator built on Vue and Vite.
+VitePress 是一个基于 Vue 和 Vite 构建的强大静态站点生成器。
 
-## Installation
+## 安装
 
 ```bash
 npm install -D vitepress
 ```
 
-## Configuration
+## 配置
 
-Create `.vitepress/config.ts`:
+创建 `.vitepress/config.ts`：
 
 ```typescript
 export default {
-  title: 'My Site',
-  description: 'A VitePress site'
+  title: '我的站点',
+  description: '一个 VitePress 站点'
 }
 ```
 
-## Writing Content
+## 编写内容
 
-Use Markdown with Vue enhancements:
+使用 Markdown 配合 Vue 增强功能：
 
-- Custom components
-- Syntax highlighting
-- Math equations
+- 自定义组件
+- 代码高亮
+- 数学公式
 
-## Deployment
+## 部署
 
-VitePress can be deployed to:
+VitePress 可以部署到：
 - Vercel
 - Netlify
 - GitHub Pages
@@ -48,4 +48,4 @@ VitePress can be deployed to:
 
 ---
 
-*Happy coding!*
+*祝编码愉快！*

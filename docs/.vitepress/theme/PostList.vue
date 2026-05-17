@@ -15,7 +15,7 @@ import PostMeta from './PostMeta.vue'
         :categories="post.categories"
       />
       <p v-if="post.excerpt" class="excerpt" v-html="post.excerpt"></p>
-      <a :href="post.url" class="read-more">Read more →</a>
+      <a :href="post.url" class="read-more">阅读全文 →</a>
     </article>
   </div>
 </template>

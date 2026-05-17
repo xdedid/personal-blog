@@ -1,31 +1,31 @@
 ---
-title: About Me
+title: 关于我
 layout: doc
 ---
 
-# About Me
+# 关于我
 
-Hello! I'm a developer passionate about web technologies and open source.
+你好！我是一个热爱 Web 技术和开源的开发者。
 
-## What I Do
+## 我在做什么
 
-- **Web Development**: Building modern web applications with Vue, React, and TypeScript
-- **Open Source**: Contributing to and maintaining open source projects
-- **Writing**: Sharing knowledge through blog posts and tutorials
+- **Web 开发**：使用 Vue、React 和 TypeScript 构建现代 Web 应用
+- **开源贡献**：参与和维护开源项目
+- **技术写作**：通过博客文章和教程分享知识
 
-## Skills
+## 技能
 
 - JavaScript / TypeScript
 - Vue.js / React
 - Node.js
 - Python
-- DevOps & Cloud
+- DevOps & 云服务
 
-## Contact
+## 联系方式
 
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
+- GitHub：[@xdedid](https://github.com/xdedid)
+- 邮箱：264674590@qq.com
 
 ---
 
-*Feel free to reach out!*
+*欢迎交流！*

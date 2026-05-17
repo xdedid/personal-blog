@@ -1,19 +1,19 @@
 ---
-title: 10 Web Development Tips
+title: 10 个 Web 开发实用技巧
 date: 2026-05-17
 categories:
-  - Tips
+  - 技巧
 tags:
   - javascript
   - css
-  - productivity
+  - 效率
 ---
 
-# 10 Web Development Tips
+# 10 个 Web 开发实用技巧
 
-Here are some useful tips for web developers.
+这里有一些对 Web 开发者非常有用的技巧。
 
-## 1. Use CSS Custom Properties
+## 1. 使用 CSS 自定义属性
 
 ```css
 :root {
@@ -25,21 +25,21 @@ Here are some useful tips for web developers.
 }
 ```
 
-## 2. Destructure in Function Parameters
+## 2. 函数参数解构
 
 ```javascript
 function greet({ name, age }) {
-  console.log(`Hello ${name}, age ${age}`)
+  console.log(`你好 ${name}，年龄 ${age}`)
 }
 ```
 
-## 3. Use Optional Chaining
+## 3. 使用可选链
 
 ```javascript
 const city = user?.address?.city
 ```
 
-## 4. Template Literals for Multi-line
+## 4. 模板字面量处理多行文本
 
 ```javascript
 const html = `
@@ -49,7 +49,7 @@ const html = `
 `
 ```
 
-## 5. Console.table for Arrays
+## 5. 用 Console.table 展示数组
 
 ```javascript
 console.table(users)
@@ -57,4 +57,4 @@ console.table(users)
 
 ---
 
-*More tips coming soon!*
+*更多技巧即将推出！*

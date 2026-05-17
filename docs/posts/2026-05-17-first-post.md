@@ -1,36 +1,36 @@
 ---
-title: Hello World - My First Blog Post
+title: 你好世界 - 我的第一篇博客文章
 date: 2026-05-17
 categories:
-  - General
+  - 随笔
 tags:
-  - introduction
-  - blog
+  - 介绍
+  - 博客
 ---
 
-# Hello World
+# 你好世界
 
-Welcome to my personal blog! This is my first post using VitePress.
+欢迎来到我的个人博客！这是我使用 VitePress 写的第一篇文章。
 
-## What is VitePress?
+## 什么是 VitePress？
 
-VitePress is a Vue-powered static site generator built on top of Vite. It's fast, lightweight, and perfect for blogs.
+VitePress 是一个基于 Vue 和 Vite 构建的静态站点生成器。它速度快、体积小，非常适合搭建博客。
 
-## Features
+## 特性
 
-- **Fast**: Built on Vite for instant hot module replacement
-- **Markdown**: Write content in Markdown with Vue enhancements
-- **Dark Mode**: Built-in dark mode support
-- **Search**: Local search functionality
+- **快速**：基于 Vite 构建，支持即时热更新
+- **Markdown**：使用 Markdown 编写内容，支持 Vue 增强
+- **暗色模式**：内置暗色模式支持
+- **搜索**：本地搜索功能
 
-## What's Next?
+## 接下来
 
-Stay tuned for more posts about:
+敬请期待更多关于以下内容的文章：
 
-1. Web development tutorials
-2. Open source projects
-3. Technical insights
+1. Web 开发教程
+2. 开源项目
+3. 技术见解
 
 ---
 
-*Thanks for reading!*
+*感谢阅读！*
