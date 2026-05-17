@@ -7,7 +7,7 @@ import BlogShowcase from './BlogShowcase.vue'
 <template>
   <div class="home-layout">
     <NavBar />
-    <main class="fullpage-scroll">
+    <main class="main-content">
       <SplashSection />
       <BlogShowcase />
     </main>
@@ -16,18 +16,10 @@ import BlogShowcase from './BlogShowcase.vue'
 
 <style scoped>
 .home-layout {
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
-.fullpage-scroll {
-  height: 100vh;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-}
-
-.fullpage-scroll > :deep(*) {
-  scroll-snap-align: start;
+.main-content {
+  min-height: 100vh;
 }
 </style>

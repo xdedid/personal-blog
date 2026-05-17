@@ -15,31 +15,6 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-/* 全页滚动 */
-html, body {
-  height: 100%;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-}
-
-/* 首页布局 */
-.home-layout {
-  height: 100vh;
-  overflow: hidden;
-}
-
-.fullpage-scroll {
-  height: 100vh;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-}
-
-.fullpage-scroll > * {
-  scroll-snap-align: start;
-}
-
 /* 博客文章样式 */
 .vp-doc h1 {
   font-size: 2em;
@@ -73,10 +48,6 @@ button:focus-visible {
 
 /* 减少动画 */
 @media (prefers-reduced-motion: reduce) {
-  .fullpage-scroll {
-    scroll-behavior: auto;
-  }
-
   * {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
