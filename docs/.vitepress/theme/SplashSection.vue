@@ -29,13 +29,11 @@ onMounted(() => {
 .content {
   text-align: center;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.6s ease;
 }
 
 .content.visible {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .title {
