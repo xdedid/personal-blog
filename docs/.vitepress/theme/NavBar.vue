@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useData } from 'vitepress'
 
-const { isDark, theme } = useData()
 const isMobileMenuOpen = ref(false)
-
-const toggleMobileMenu = () => {
-  isMobileMenuOpen.value = !isMobileMenuOpen.value
-}
 
 const navItems = [
   { text: '首页', link: '/' },
@@ -18,23 +12,34 @@ const navItems = [
 
 <template>
   <header class="navbar">
-    <div class="navbar-container">
-      <a href="/" class="navbar-brand">xdedid's blogs</a>
-
-      <nav class="navbar-links" :class="{ open: isMobileMenuOpen }">
+    <div class="navbar-inner">
+      <!-- 左上角导航 -->
+      <nav class="nav-left">
         <a v-for="item in navItems" :key="item.link" :href="item.link" class="nav-link">
           {{ item.text }}
         </a>
       </nav>
 
-      <button class="mobile-menu-btn" @click="toggleMobileMenu" :aria-label="isMobileMenuOpen ? '关闭菜单' : '打开菜单'">
-        <svg v-if="!isMobileMenuOpen" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <!-- 右上角头像 -->
+      <a href="/about" class="avatar-link">
+        <div class="avatar">
+          <span>X</span>
+        </div>
+      </a>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" @click="isMobileMenuOpen = !isMobileMenuOpen">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
           <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        <svg v-else width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
       </button>
+    </div>
+
+    <!-- 移动端菜单 -->
+    <div class="mobile-menu" :class="{ open: isMobileMenuOpen }">
+      <a v-for="item in navItems" :key="item.link" :href="item.link" class="mobile-link" @click="isMobileMenuOpen = false">
+        {{ item.text }}
+      </a>
     </div>
   </header>
 </template>
@@ -45,53 +50,57 @@ const navItems = [
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--vp-c-divider);
-  transition: background 0.3s, border-color 0.3s;
+  z-index: 1000;
+  padding: 1.25rem 2rem;
 }
 
-:root.dark .navbar {
-  background: rgba(15, 25, 35, 0.8);
-}
-
-.navbar-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  height: 60px;
+.navbar-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.navbar-brand {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-  text-decoration: none;
-}
-
-.navbar-brand:hover {
-  color: var(--vp-c-brand-1);
-}
-
-.navbar-links {
+.nav-left {
   display: flex;
   gap: 2rem;
 }
 
 .nav-link {
-  font-size: 0.95rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  color: var(--vp-c-text-2);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .nav-link:hover {
-  color: var(--vp-c-brand-1);
+  color: white;
+}
+
+.avatar-link {
+  text-decoration: none;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.avatar:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .mobile-menu-btn {
@@ -99,39 +108,55 @@ const navItems = [
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.5rem;
-  color: var(--vp-c-text-1);
+  padding: 0.25rem;
+  color: white;
+}
+
+.mobile-menu {
+  display: none;
 }
 
 @media (max-width: 768px) {
+  .navbar {
+    padding: 1rem 1.25rem;
+  }
+
+  .nav-left {
+    display: none;
+  }
+
   .mobile-menu-btn {
     display: block;
   }
 
-  .navbar-links {
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     top: 60px;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    flex-direction: column;
-    padding: 1rem;
-    gap: 1rem;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 1rem 1.25rem;
+    gap: 0.5rem;
     transform: translateY(-100%);
     opacity: 0;
     pointer-events: none;
-    transition: transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
 
-  :root.dark .navbar-links {
-    background: rgba(15, 25, 35, 0.95);
-  }
-
-  .navbar-links.open {
+  .mobile-menu.open {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
+  }
+
+  .mobile-link {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    padding: 0.5rem 0;
   }
 }
 </style>

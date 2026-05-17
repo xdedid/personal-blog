@@ -1,49 +1,29 @@
 :root {
-  --vp-c-brand-1: #646cff;
-  --vp-c-brand-2: #747bff;
-  --vp-c-brand-3: #535bf2;
+  --vp-c-brand-1: #6366f1;
+  --vp-c-brand-2: #818cf8;
+  --vp-c-brand-3: #4f46e5;
 }
 
 .dark {
-  --vp-c-brand-1: #42d392;
-  --vp-c-brand-2: #42d392cc;
-  --vp-c-brand-3: #42d39299;
+  --vp-c-brand-1: #818cf8;
+  --vp-c-brand-2: #a5b4fc;
+  --vp-c-brand-3: #6366f1;
 }
 
-/* Blog post styling */
-.vp-doc h1 {
-  font-size: 2em;
-  margin-bottom: 1em;
+/* 全局字体 */
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-.vp-doc h2 {
-  margin-top: 2em;
-  border-bottom: 1px solid var(--vp-c-divider);
-  padding-bottom: 0.5em;
-}
-
-/* Post meta styling */
-.post-meta {
-  display: flex;
-  gap: 1rem;
-  color: var(--vp-c-text-2);
-  font-size: 0.9em;
-  margin-bottom: 2rem;
-}
-
-.post-meta span {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-/* Fullpage scroll container */
+/* 全页滚动 */
 html, body {
   height: 100%;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
-/* Home layout fullpage scroll */
+/* 首页布局 */
 .home-layout {
   height: 100vh;
   overflow: hidden;
@@ -56,36 +36,57 @@ html, body {
   scroll-behavior: smooth;
 }
 
-/* Scroll snap sections */
-.splash-section,
-.blog-showcase {
+.fullpage-scroll > * {
   scroll-snap-align: start;
-  min-height: 100vh;
 }
 
-/* Smooth scroll for non-home pages */
-.vp-doc {
-  scroll-behavior: smooth;
+/* 博客文章样式 */
+.vp-doc h1 {
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 1em;
+  letter-spacing: -0.02em;
 }
 
-/* Focus styles for accessibility */
+.vp-doc h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-top: 2em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+/* 文章元数据 */
+.post-meta {
+  display: flex;
+  gap: 1rem;
+  color: var(--vp-c-text-2);
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.post-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* 焦点样式 */
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--vp-c-brand-1);
   outline-offset: 2px;
+  border-radius: 4px;
 }
 
-/* Reduced motion */
+/* 减少动画 */
 @media (prefers-reduced-motion: reduce) {
   .fullpage-scroll {
     scroll-behavior: auto;
   }
 
-  .splash-content {
-    transition: none;
-  }
-
-  .scroll-indicator {
-    animation: none;
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
 }
