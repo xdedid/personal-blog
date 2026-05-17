@@ -26,6 +26,7 @@ onUnmounted(() => {
   <div class="home-layout">
     <div class="bg-wrapper">
       <div class="bg-image" :style="{ backgroundPositionY: bgY + '%' }"></div>
+      <div class="bg-overlay"></div>
     </div>
     <NavBar />
     <main class="main-content">
@@ -52,6 +53,12 @@ onUnmounted(() => {
   height: 100%;
   background: url('/personal-blog/wallpapers/hyouka.jpg') center/cover no-repeat;
   transition: background-position-y 0.1s linear;
+}
+
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .main-content {
