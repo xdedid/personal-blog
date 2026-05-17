@@ -58,7 +58,7 @@ onUnmounted(() => {
 .bg-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .main-content {
