@@ -1,0 +1,38 @@
+:root {
+  --vp-c-brand-1: #646cff;
+  --vp-c-brand-2: #747bff;
+  --vp-c-brand-3: #535bf2;
+}
+
+.dark {
+  --vp-c-brand-1: #42d392;
+  --vp-c-brand-2: #42d392cc;
+  --vp-c-brand-3: #42d39299;
+}
+
+/* Blog post styling */
+.vp-doc h1 {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.vp-doc h2 {
+  margin-top: 2em;
+  border-bottom: 1px solid var(--vp-c-divider);
+  padding-bottom: 0.5em;
+}
+
+/* Post meta styling */
+.post-meta {
+  display: flex;
+  gap: 1rem;
+  color: var(--vp-c-text-2);
+  font-size: 0.9em;
+  margin-bottom: 2rem;
+}
+
+.post-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
