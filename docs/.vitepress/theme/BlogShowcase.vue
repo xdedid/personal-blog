@@ -47,8 +47,9 @@ const recentPosts = posts.slice(0, 3)
   font-family: 'Inter', sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #111;
+  color: #fff;
   margin: 0 0 3rem 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .posts-grid {
@@ -58,16 +59,17 @@ const recentPosts = posts.slice(0, 3)
 }
 
 .post-card {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
   border-radius: 12px;
   padding: 1.5rem;
-  border: 1px solid #e5e7eb;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .post-card:hover {
-  border-color: #d1d5db;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .post-meta {
@@ -77,7 +79,7 @@ const recentPosts = posts.slice(0, 3)
 .post-date {
   font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
-  color: #9ca3af;
+  color: #6b7280;
 }
 
 .post-title {
@@ -99,7 +101,7 @@ const recentPosts = posts.slice(0, 3)
 .post-excerpt {
   font-family: 'Inter', sans-serif;
   font-size: 0.875rem;
-  color: #6b7280;
+  color: #4b5563;
   line-height: 1.6;
   margin: 0 0 1rem 0;
   display: -webkit-box;
@@ -129,50 +131,18 @@ const recentPosts = posts.slice(0, 3)
   font-family: 'Inter', sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #111;
+  color: #fff;
   text-decoration: none;
   padding: 0.75rem 1.5rem;
-  border: 1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   transition: background 0.2s;
 }
 
 .view-all:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-:root.dark .section-title {
-  color: #fff;
-}
-
-:root.dark .post-card {
-  background: rgba(26, 26, 36, 0.8);
-  border-color: #2a2a3a;
-}
-
-:root.dark .post-card:hover {
-  border-color: #3a3a4a;
-}
-
-:root.dark .post-title a {
-  color: #fff;
-}
-
-:root.dark .post-title a:hover {
-  color: #818cf8;
-}
-
-:root.dark .post-link {
-  color: #818cf8;
-}
-
-:root.dark .view-all {
-  color: #fff;
-  border-color: #2a2a3a;
-}
-
-:root.dark .view-all:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.25);
 }
 
 @media (max-width: 768px) {

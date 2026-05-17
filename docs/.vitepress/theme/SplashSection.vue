@@ -24,20 +24,9 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: url('/personal-blog/wallpapers/hyouka.jpg') center/cover no-repeat;
-  position: relative;
-}
-
-.splash-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.3);
 }
 
 .content {
-  position: relative;
-  z-index: 10;
   text-align: center;
   opacity: 0;
   transform: translateY(20px);
@@ -56,16 +45,16 @@ onMounted(() => {
   letter-spacing: -0.02em;
   color: #fff;
   margin: 0 0 0.75rem 0;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .subtitle {
   font-family: 'Inter', sans-serif;
   font-size: 1.125rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   margin: 0;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 768px) {
