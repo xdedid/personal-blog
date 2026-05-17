@@ -4,11 +4,13 @@ import NavBar from './NavBar.vue'
 import SplashSection from './SplashSection.vue'
 import BlogShowcase from './BlogShowcase.vue'
 
-const bgTransform = ref('translateY(0)')
+const bgY = ref(0)
 
 const handleScroll = () => {
   const scrollY = window.scrollY
-  bgTransform.value = `translateY(-${scrollY * 0.3}px)`
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight
+  const scrollPercent = docHeight > 0 ? scrollY / docHeight : 0
+  bgY.value = scrollPercent * 30
 }
 
 onMounted(() => {
@@ -23,7 +25,7 @@ onUnmounted(() => {
 <template>
   <div class="home-layout">
     <div class="bg-wrapper">
-      <div class="bg-image" :style="{ transform: bgTransform }"></div>
+      <div class="bg-image" :style="{ backgroundPositionY: bgY + '%' }"></div>
     </div>
     <NavBar />
     <main class="main-content">
@@ -43,14 +45,13 @@ onUnmounted(() => {
   position: fixed;
   inset: 0;
   z-index: -1;
-  overflow: hidden;
 }
 
 .bg-image {
   width: 100%;
-  height: 150%;
+  height: 100%;
   background: url('/personal-blog/wallpapers/hyouka.jpg') center/cover no-repeat;
-  will-change: transform;
+  transition: background-position-y 0.1s linear;
 }
 
 .main-content {
