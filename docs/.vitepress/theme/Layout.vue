@@ -247,10 +247,10 @@ const isHomePage = computed(() => {
 
 /* 文档内容区域：半透明玻璃态 */
 .vp-doc {
-  background: rgba(255, 255, 255, 0.82) !important;
-  backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-radius: 16px !important;
   padding: 2.5rem !important;
 }
@@ -279,8 +279,8 @@ const isHomePage = computed(() => {
 }
 
 .dark .vp-doc {
-  background: rgba(20, 20, 40, 0.85) !important;
-  border-color: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(0, 0, 0, 0.25) !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 .dark .VPSidebar {
