@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import NavBar from './NavBar.vue'
 import SplashSection from './SplashSection.vue'
 import BlogShowcase from './BlogShowcase.vue'
+import KnowledgeShowcase from './KnowledgeShowcase.vue'
 
 const bgY = ref(0)
 
@@ -32,6 +33,7 @@ onUnmounted(() => {
     <main class="main-content">
       <SplashSection />
       <BlogShowcase />
+      <KnowledgeShowcase />
     </main>
   </div>
 </template>
