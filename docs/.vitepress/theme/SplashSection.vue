@@ -17,7 +17,6 @@ onMounted(() => {
         <span class="title-line">xdedid's</span>
         <span class="title-line accent">blogs</span>
       </h1>
-      <p class="subtitle">个人思考与技术分享</p>
       <div class="scroll-hint">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
@@ -72,16 +71,6 @@ onMounted(() => {
   background-clip: text;
 }
 
-.subtitle {
-  font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif;
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  font-weight: 300;
-  letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0;
-  text-shadow: var(--text-shadow-sm);
-}
-
 .scroll-hint {
   position: absolute;
   bottom: 3rem;
@@ -96,9 +85,4 @@ onMounted(() => {
   50% { transform: translateX(-50%) translateY(8px); }
 }
 
-@media (max-width: 768px) {
-  .subtitle {
-    letter-spacing: 0.1em;
-  }
-}
 </style>
