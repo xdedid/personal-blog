@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, watch } from 'vue'
 import {
   saveToken,
   getToken,
@@ -42,15 +42,6 @@ const form = ref<PostFormData>({
   description: '',
   content: '',
   knowledgeCategory: ''
-})
-
-const tagsInput = ref('')
-
-watch(tagsInput, (val) => {
-  form.value.tags = val
-    .split(/[,，]/)
-    .map(t => t.trim())
-    .filter(Boolean)
 })
 
 // Markdown 预览（简单渲染）
@@ -150,8 +141,6 @@ async function handleSubmit() {
       form.value.content = ''
       form.value.description = ''
       form.value.knowledgeCategory = ''
-      tagsInput.value = ''
-      form.value.tags = []
     } else {
       status.value = { type: 'error', message: result.error || '发布失败' }
     }
@@ -230,12 +219,6 @@ async function handleSubmit() {
       <div v-if="form.category === 'knowledge'" class="form-group">
         <label class="form-label">知识库分类</label>
         <input v-model="form.knowledgeCategory" type="text" class="form-input" placeholder="如: 前端开发" />
-      </div>
-
-      <!-- 标签 -->
-      <div class="form-group">
-        <label class="form-label">标签</label>
-        <input v-model="tagsInput" type="text" class="form-input" placeholder="用逗号分隔，如: Vue, JavaScript" />
       </div>
 
       <!-- 日期 -->
