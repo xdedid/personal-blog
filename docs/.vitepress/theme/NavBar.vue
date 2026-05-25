@@ -8,6 +8,7 @@ const navItems = [
   { text: '首页', link: '/personal-blog/' },
   { text: '文章', link: '/personal-blog/posts/' },
   { text: '知识库', link: '/personal-blog/knowledge/' },
+  { text: '发布', link: '/personal-blog/upload' },
   { text: '关于', link: '/personal-blog/about' }
 ]
 
