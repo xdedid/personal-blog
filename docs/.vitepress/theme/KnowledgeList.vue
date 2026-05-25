@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { data as posts, getCategories, getTags, type KnowledgePost } from '../utils/knowledge.data'
+import { data as posts, type KnowledgePost } from '../utils/knowledge.data'
+import { getCategories, getTags } from '../utils/knowledge-helpers'
 
 const selectedCategory = ref<string>('')
 const selectedTag = ref<string>('')
