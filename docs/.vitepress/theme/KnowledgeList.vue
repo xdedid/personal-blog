@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { data as posts, type KnowledgePost } from '../utils/knowledge.data'
+import { data as posts } from '../utils/knowledge.data'
 import { getCategories, getTags } from '../utils/knowledge-helpers'
 
 const selectedCategory = ref<string>('')
@@ -29,7 +29,6 @@ function getCategoryCount(category: string): number {
 
 <template>
   <div class="knowledge-list">
-    <!-- 筛选区域 -->
     <div class="filters">
       <div class="filter-group">
         <h3 class="filter-title">分类</h3>
@@ -76,14 +75,13 @@ function getCategoryCount(category: string): number {
       </button>
     </div>
 
-    <!-- 文章列表 -->
     <div class="posts-container">
       <div v-if="filteredPosts.length === 0" class="empty-state">
         <p>没有找到匹配的文档</p>
         <button class="clear-btn" @click="clearFilters">清除筛选</button>
       </div>
 
-      <article v-for="post in filteredPosts" :key="post.url" class="post-item">
+      <article v-for="post in filteredPosts" :key="post.url" class="post-card">
         <div class="post-header">
           <span class="post-category">{{ post.category }}</span>
           <span class="post-date">{{ post.date }}</span>
@@ -96,7 +94,7 @@ function getCategoryCount(category: string): number {
         <div v-if="post.tags.length" class="post-tags">
           <span v-for="tag in post.tags" :key="tag" class="tag">{{ tag }}</span>
         </div>
-        <a :href="post.url" class="read-more">阅读全文 →</a>
+        <a :href="post.url" class="read-more">阅读全文 &rarr;</a>
       </article>
     </div>
   </div>
@@ -108,12 +106,14 @@ function getCategoryCount(category: string): number {
   margin: 0 auto;
 }
 
-/* 筛选区域 */
 .filters {
-  background: var(--vp-c-bg-soft);
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
   padding: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
 }
 
 .filter-group {
@@ -125,12 +125,13 @@ function getCategoryCount(category: string): number {
 }
 
 .filter-title {
-  font-size: 0.875rem;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--vp-c-text-2);
   margin: 0 0 0.75rem 0;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
 }
 
 .filter-options {
@@ -140,12 +141,13 @@ function getCategoryCount(category: string): number {
 }
 
 .filter-btn {
+  font-family: 'Source Sans 3', sans-serif;
   padding: 0.5rem 1rem;
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
-  background: var(--vp-c-bg);
+  background: transparent;
   color: var(--vp-c-text-2);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -162,18 +164,19 @@ function getCategoryCount(category: string): number {
 }
 
 .tag-btn {
-  font-size: 0.8125rem;
+  font-size: 0.8rem;
   padding: 0.375rem 0.75rem;
 }
 
 .clear-btn {
+  font-family: 'Source Sans 3', sans-serif;
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 8px;
   background: var(--vp-c-default-soft);
   color: var(--vp-c-text-2);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -183,9 +186,11 @@ function getCategoryCount(category: string): number {
   color: var(--vp-c-brand-1);
 }
 
-/* 文章列表 */
 .posts-container {
   min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .empty-state {
@@ -195,21 +200,27 @@ function getCategoryCount(category: string): number {
 }
 
 .empty-state p {
+  font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif;
   margin: 0 0 1rem 0;
   font-size: 1.125rem;
 }
 
-.post-item {
-  padding: 1.5rem;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  transition: all 0.2s ease;
+.post-card {
+  padding: 1.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
 }
 
-.post-item:hover {
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
   border-color: var(--vp-c-brand-1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .post-header {
@@ -220,28 +231,36 @@ function getCategoryCount(category: string): number {
 }
 
 .post-category {
-  padding: 0.25rem 0.75rem;
+  font-family: 'Source Sans 3', sans-serif;
+  padding: 0.2rem 0.625rem;
   background: var(--vp-c-brand-soft);
   color: var(--vp-c-brand-1);
   border-radius: 6px;
   font-size: 0.75rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .post-date {
+  font-family: 'Source Sans 3', sans-serif;
   color: var(--vp-c-text-3);
-  font-size: 0.8125rem;
+  font-size: 0.8rem;
+  font-weight: 300;
 }
 
 .post-title {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
   margin: 0 0 0.5rem 0;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
 }
 
 .post-title a {
   color: var(--vp-c-text-1);
   text-decoration: none;
+  transition: color 0.2s;
 }
 
 .post-title a:hover {
@@ -249,15 +268,20 @@ function getCategoryCount(category: string): number {
 }
 
 .post-description {
+  font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif;
   color: var(--vp-c-text-2);
-  font-size: 0.9375rem;
+  font-size: 0.95rem;
+  font-weight: 300;
   margin: 0 0 0.75rem 0;
+  line-height: 1.6;
 }
 
 .post-excerpt {
+  font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif;
   color: var(--vp-c-text-2);
   font-size: 0.875rem;
-  line-height: 1.6;
+  font-weight: 300;
+  line-height: 1.7;
   margin: 0 0 1rem 0;
 }
 
@@ -269,20 +293,28 @@ function getCategoryCount(category: string): number {
 }
 
 .tag {
-  padding: 0.25rem 0.625rem;
+  font-family: 'Source Sans 3', sans-serif;
+  padding: 0.2rem 0.6rem;
   background: var(--vp-c-default-soft);
   color: var(--vp-c-text-2);
-  border-radius: 4px;
+  border-radius: 5px;
   font-size: 0.75rem;
+  font-weight: 400;
 }
 
 .read-more {
+  font-family: 'Source Sans 3', sans-serif;
   color: var(--vp-c-brand-1);
   font-weight: 500;
   font-size: 0.875rem;
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
-/* 响应式 */
+.read-more:hover {
+  color: var(--vp-c-brand-2);
+}
+
 @media (max-width: 768px) {
   .filters {
     padding: 1rem;
@@ -290,11 +322,11 @@ function getCategoryCount(category: string): number {
 
   .filter-btn {
     padding: 0.375rem 0.75rem;
-    font-size: 0.8125rem;
+    font-size: 0.8rem;
   }
 
-  .post-item {
-    padding: 1rem;
+  .post-card {
+    padding: 1.25rem;
   }
 
   .post-title {

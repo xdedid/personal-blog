@@ -1,7 +1,3 @@
 ---
-layout: page
+title: xdedid's blogs
 ---
-
-# 首页
-
-本站使用 VitePress 构建。
