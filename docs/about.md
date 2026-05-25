@@ -1,6 +1,5 @@
 ---
 title: 关于我
-layout: doc
 ---
 
 # 关于我

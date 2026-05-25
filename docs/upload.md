@@ -1,6 +1,5 @@
 ---
 title: 发布文档
-layout: doc
 ---
 
 <script setup>

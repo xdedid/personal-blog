@@ -1,6 +1,5 @@
 ---
 title: 文章列表
-layout: doc
 ---
 
 <script setup>

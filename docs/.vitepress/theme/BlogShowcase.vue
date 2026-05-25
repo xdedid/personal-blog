@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { data as posts } from '../utils/posts.data'
+import { withBase } from 'vitepress'
 
 const recentPosts = posts.slice(0, 3)
 </script>
@@ -23,7 +24,7 @@ const recentPosts = posts.slice(0, 3)
       </div>
 
       <div class="footer">
-        <a href="/personal-blog/posts/" class="view-all">查看全部文章</a>
+        <a :href="withBase('/posts/')" class="view-all">查看全部文章</a>
       </div>
     </div>
   </section>

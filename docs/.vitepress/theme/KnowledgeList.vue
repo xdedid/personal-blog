@@ -102,8 +102,8 @@ function getCategoryCount(category: string): number {
 
 <style scoped>
 .knowledge-list {
-  max-width: 900px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .filters {
@@ -128,7 +128,7 @@ function getCategoryCount(category: string): number {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--vp-c-text-2);
+  color: rgba(255, 255, 255, 0.5);
   margin: 0 0 0.75rem 0;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -143,24 +143,24 @@ function getCategoryCount(category: string): number {
 .filter-btn {
   font-family: 'Source Sans 3', sans-serif;
   padding: 0.5rem 1rem;
-  border: 1px solid var(--vp-c-divider);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   background: transparent;
-  color: var(--vp-c-text-2);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .filter-btn:hover {
-  border-color: var(--vp-c-brand-1);
-  color: var(--vp-c-brand-1);
+  border-color: #c4b5fd;
+  color: #c4b5fd;
 }
 
 .filter-btn.active {
-  background: var(--vp-c-brand-1);
-  border-color: var(--vp-c-brand-1);
-  color: white;
+  background: rgba(196, 181, 253, 0.2);
+  border-color: #c4b5fd;
+  color: #fff;
 }
 
 .tag-btn {
@@ -174,16 +174,16 @@ function getCategoryCount(category: string): number {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 8px;
-  background: var(--vp-c-default-soft);
-  color: var(--vp-c-text-2);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .clear-btn:hover {
-  background: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-1);
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
 }
 
 .posts-container {
@@ -196,7 +196,7 @@ function getCategoryCount(category: string): number {
 .empty-state {
   text-align: center;
   padding: 4rem 2rem;
-  color: var(--vp-c-text-2);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .empty-state p {
@@ -219,8 +219,8 @@ function getCategoryCount(category: string): number {
 
 .post-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .post-header {
@@ -233,8 +233,8 @@ function getCategoryCount(category: string): number {
 .post-category {
   font-family: 'Source Sans 3', sans-serif;
   padding: 0.2rem 0.625rem;
-  background: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-1);
+  background: rgba(196, 181, 253, 0.15);
+  color: #c4b5fd;
   border-radius: 6px;
   font-size: 0.75rem;
   font-weight: 600;
@@ -243,7 +243,7 @@ function getCategoryCount(category: string): number {
 
 .post-date {
   font-family: 'Source Sans 3', sans-serif;
-  color: #555;
+  color: rgba(255, 255, 255, 0.5);
   font-size: 0.8rem;
   font-weight: 300;
 }
@@ -258,18 +258,18 @@ function getCategoryCount(category: string): number {
 }
 
 .post-title a {
-  color: #111;
+  color: #fff;
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .post-title a:hover {
-  color: var(--vp-c-brand-1);
+  color: #c4b5fd;
 }
 
 .post-description {
   font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif;
-  color: #333;
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.95rem;
   font-weight: 300;
   margin: 0 0 0.75rem 0;
@@ -278,7 +278,7 @@ function getCategoryCount(category: string): number {
 
 .post-excerpt {
   font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif;
-  color: #333;
+  color: rgba(255, 255, 255, 0.6);
   font-size: 0.875rem;
   font-weight: 300;
   line-height: 1.7;
@@ -295,8 +295,8 @@ function getCategoryCount(category: string): number {
 .tag {
   font-family: 'Source Sans 3', sans-serif;
   padding: 0.2rem 0.6rem;
-  background: var(--vp-c-default-soft);
-  color: var(--vp-c-text-2);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
   border-radius: 5px;
   font-size: 0.75rem;
   font-weight: 400;
@@ -304,7 +304,7 @@ function getCategoryCount(category: string): number {
 
 .read-more {
   font-family: 'Source Sans 3', sans-serif;
-  color: var(--vp-c-brand-1);
+  color: #c4b5fd;
   font-weight: 500;
   font-size: 0.875rem;
   text-decoration: none;
@@ -312,7 +312,7 @@ function getCategoryCount(category: string): number {
 }
 
 .read-more:hover {
-  color: var(--vp-c-brand-2);
+  color: #fff;
 }
 
 @media (max-width: 768px) {

@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { data as posts } from '../utils/knowledge.data'
 import { getCategories } from '../utils/knowledge-helpers'
+import { withBase } from 'vitepress'
 
 const recentPosts = posts.slice(0, 4)
 const categories = computed(() => getCategories(posts).slice(0, 5))
@@ -32,7 +33,7 @@ const categories = computed(() => getCategories(posts).slice(0, 5))
       </div>
 
       <div class="footer">
-        <a href="/personal-blog/knowledge/" class="view-all">查看全部文档</a>
+        <a :href="withBase('/knowledge/')" class="view-all">查看全部文档</a>
       </div>
     </div>
   </section>

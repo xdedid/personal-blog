@@ -22,9 +22,6 @@ import PostMeta from './PostMeta.vue'
 
 <style scoped>
 .post-list {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -44,8 +41,8 @@ import PostMeta from './PostMeta.vue'
 
 .post-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .post-title {
@@ -58,18 +55,18 @@ import PostMeta from './PostMeta.vue'
 }
 
 .post-title a {
-  color: #111;
+  color: #fff;
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .post-title a:hover {
-  color: var(--vp-c-brand-1);
+  color: #c4b5fd;
 }
 
 .excerpt {
   font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif;
-  color: #333;
+  color: rgba(255, 255, 255, 0.7);
   margin: 0.75rem 0 1.25rem 0;
   line-height: 1.75;
   font-weight: 300;
@@ -77,7 +74,7 @@ import PostMeta from './PostMeta.vue'
 
 .read-more {
   font-family: 'Source Sans 3', sans-serif;
-  color: var(--vp-c-brand-1);
+  color: #c4b5fd;
   font-weight: 500;
   font-size: 0.9rem;
   text-decoration: none;
@@ -85,7 +82,7 @@ import PostMeta from './PostMeta.vue'
 }
 
 .read-more:hover {
-  color: var(--vp-c-brand-2);
+  color: #fff;
 }
 
 @media (max-width: 768px) {

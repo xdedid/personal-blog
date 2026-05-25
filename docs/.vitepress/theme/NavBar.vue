@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useData, withBase } from 'vitepress'
 
 const isMobileMenuOpen = ref(false)
 const isDark = ref(false)
+const { theme } = useData()
 
-const navItems = [
-  { text: '首页', link: '/personal-blog/' },
-  { text: '文章', link: '/personal-blog/posts/' },
-  { text: '知识库', link: '/personal-blog/knowledge/' },
-  { text: '发布', link: '/personal-blog/upload' },
-  { text: '关于', link: '/personal-blog/about' }
-]
+const navItems = computed(() => {
+  const items = theme.value.nav || []
+  return items.map((item: { text: string; link: string }) => ({
+    text: item.text,
+    link: withBase(item.link)
+  }))
+})
 
 function toggleTheme() {
   isDark.value = !isDark.value
@@ -46,7 +48,7 @@ onMounted(() => {
 <template>
   <header class="navbar">
     <div class="navbar-inner">
-      <a href="/personal-blog/" class="logo">xdedid</a>
+      <a :href="withBase('/')" class="logo">xdedid</a>
 
       <nav class="nav-links">
         <a v-for="item in navItems" :key="item.link" :href="item.link" class="nav-link">

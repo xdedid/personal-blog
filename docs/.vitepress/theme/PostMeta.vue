@@ -38,7 +38,7 @@ defineProps<{
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  color: #444;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .meta-item svg {
@@ -51,8 +51,8 @@ defineProps<{
 }
 
 .tag {
-  background: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-1);
+  background: rgba(196, 181, 253, 0.15);
+  color: #c4b5fd;
   padding: 0.15rem 0.5rem;
   border-radius: 5px;
   font-size: 0.8em;

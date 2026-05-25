@@ -322,8 +322,6 @@ async function handleSubmit() {
 
 <style scoped>
 .upload-page {
-  max-width: 900px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -342,14 +340,15 @@ async function handleSubmit() {
   font-family: 'Playfair Display', 'Noto Serif SC', serif;
   font-size: 1.35rem;
   font-weight: 600;
-  color: #111;
+  color: #fff;
   margin: 0 0 0.5rem 0;
+  text-shadow: var(--text-shadow-sm);
 }
 
 .card-desc {
   font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif;
   font-size: 0.875rem;
-  color: #555;
+  color: rgba(255, 255, 255, 0.6);
   margin: 0 0 1.25rem 0;
   line-height: 1.6;
 }
@@ -382,20 +381,20 @@ async function handleSubmit() {
   height: 28px;
   border: none;
   background: transparent;
-  color: #777;
+  color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
   border-radius: 4px;
   transition: color 0.2s;
 }
 
 .icon-btn:hover {
-  color: #333;
+  color: #fff;
 }
 
 .token-status {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 0.8rem;
-  color: #16a34a;
+  color: #4ade80;
   margin: 0.5rem 0 0 0;
 }
 
@@ -409,7 +408,7 @@ async function handleSubmit() {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #555;
+  color: rgba(255, 255, 255, 0.5);
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -420,9 +419,9 @@ async function handleSubmit() {
   padding: 0.625rem 0.875rem;
   font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif;
   font-size: 0.9rem;
-  color: #111;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -430,12 +429,12 @@ async function handleSubmit() {
 }
 
 .form-input:focus {
-  border-color: var(--vp-c-brand-1);
-  box-shadow: 0 0 0 3px var(--vp-c-brand-soft);
+  border-color: #c4b5fd;
+  box-shadow: 0 0 0 3px rgba(196, 181, 253, 0.15);
 }
 
 .form-input::placeholder {
-  color: #999;
+  color: rgba(255, 255, 255, 0.35);
 }
 
 /* 文件上传 */
@@ -456,9 +455,9 @@ async function handleSubmit() {
   padding: 0.75rem 1.25rem;
   font-family: 'Source Sans 3', sans-serif;
   font-size: 0.875rem;
-  color: #555;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px dashed rgba(0, 0, 0, 0.2);
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
@@ -466,9 +465,9 @@ async function handleSubmit() {
 }
 
 .file-label:hover {
-  border-color: var(--vp-c-brand-1);
-  color: var(--vp-c-brand-1);
-  background: rgba(255, 255, 255, 0.8);
+  border-color: #c4b5fd;
+  color: #c4b5fd;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .file-label svg {
@@ -489,23 +488,23 @@ async function handleSubmit() {
 .radio-btn {
   font-family: 'Source Sans 3', sans-serif;
   padding: 0.5rem 1.25rem;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   background: transparent;
-  color: #555;
+  color: rgba(255, 255, 255, 0.6);
   font-size: 0.875rem;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .radio-btn:hover {
-  border-color: var(--vp-c-brand-1);
-  color: var(--vp-c-brand-1);
+  border-color: #c4b5fd;
+  color: #c4b5fd;
 }
 
 .radio-btn.active {
-  background: var(--vp-c-brand-1);
-  border-color: var(--vp-c-brand-1);
+  background: rgba(196, 181, 253, 0.2);
+  border-color: #c4b5fd;
   color: #fff;
 }
 
@@ -515,9 +514,9 @@ async function handleSubmit() {
   font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif;
   font-size: 0.9rem;
   line-height: 1.8;
-  color: #333;
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   overflow-y: auto;
 }
@@ -526,7 +525,7 @@ async function handleSubmit() {
 .preview-pane :deep(h2),
 .preview-pane :deep(h3) {
   font-family: 'Playfair Display', 'Noto Serif SC', serif;
-  color: #111;
+  color: #fff;
   margin: 1em 0 0.5em;
 }
 
@@ -537,13 +536,14 @@ async function handleSubmit() {
 .preview-pane :deep(code) {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.85em;
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.1);
   padding: 0.15em 0.4em;
   border-radius: 4px;
+  color: #c4b5fd;
 }
 
 .preview-pane :deep(pre) {
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(0, 0, 0, 0.3);
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
@@ -552,25 +552,26 @@ async function handleSubmit() {
 .preview-pane :deep(pre code) {
   background: none;
   padding: 0;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .preview-pane :deep(blockquote) {
-  border-left: 3px solid var(--vp-c-brand-1);
+  border-left: 3px solid #c4b5fd;
   margin: 1em 0;
   padding: 0.5em 1em;
-  color: #555;
-  background: rgba(0, 0, 0, 0.03);
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 0 6px 6px 0;
 }
 
 .preview-pane :deep(hr) {
   border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   margin: 1.5em 0;
 }
 
 .preview-pane :deep(a) {
-  color: var(--vp-c-brand-1);
+  color: #c4b5fd;
 }
 
 .preview-pane :deep(img) {
@@ -579,7 +580,7 @@ async function handleSubmit() {
 }
 
 .preview-placeholder {
-  color: #999;
+  color: rgba(255, 255, 255, 0.35);
   font-style: italic;
 }
 
@@ -589,7 +590,7 @@ async function handleSubmit() {
   font-size: 0.875rem;
   font-weight: 500;
   padding: 0.5rem 1.25rem;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
@@ -597,14 +598,14 @@ async function handleSubmit() {
 }
 
 .btn-primary {
-  background: var(--vp-c-brand-1);
-  border-color: var(--vp-c-brand-1);
+  background: rgba(196, 181, 253, 0.2);
+  border-color: #c4b5fd;
   color: #fff;
 }
 
 .btn-primary:hover {
-  background: var(--vp-c-brand-2);
-  border-color: var(--vp-c-brand-2);
+  background: rgba(196, 181, 253, 0.35);
+  border-color: #fff;
 }
 
 .btn-primary:disabled {
@@ -614,12 +615,13 @@ async function handleSubmit() {
 
 .btn-ghost {
   background: transparent;
-  color: #555;
+  color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .btn-ghost:hover {
-  background: rgba(0, 0, 0, 0.06);
-  color: #111;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
 }
 
 .btn-lg {
@@ -646,15 +648,15 @@ async function handleSubmit() {
 }
 
 .status-msg.success {
-  background: rgba(22, 163, 74, 0.1);
-  border: 1px solid rgba(22, 163, 74, 0.2);
-  color: #16a34a;
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  color: #4ade80;
 }
 
 .status-msg.error {
-  background: rgba(220, 38, 38, 0.1);
-  border: 1px solid rgba(220, 38, 38, 0.2);
-  color: #dc2626;
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.2);
+  color: #f87171;
 }
 
 .status-link {
