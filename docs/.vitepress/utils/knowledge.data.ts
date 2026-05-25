@@ -19,7 +19,7 @@ export default createContentLoader('knowledge/*.md', {
     return raw
       .map(({ url, frontmatter, excerpt }) => ({
         title: frontmatter.title,
-        url,
+        url: `/personal-blog${url}`,
         date: formatDate(frontmatter.date),
         excerpt,
         tags: frontmatter.tags || [],

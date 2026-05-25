@@ -23,6 +23,46 @@ const isHomePage = computed(() => {
   </DefaultLayout>
 </template>
 
+<style>
+/* 全局壁纸背景 */
+body {
+  background: url('/personal-blog/wallpapers/hyouka.jpg') center/cover no-repeat fixed !important;
+}
+
+/* 覆盖 VitePress 默认背景 */
+.vp-doc,
+.vp-sidebar,
+.vp-nav,
+.vp-page {
+  background: transparent !important;
+}
+
+/* 内容区域半透明背景 */
+.vp-doc {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* 侧边栏半透明 */
+.vp-sidebar {
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* 导航栏半透明 */
+.vp-nav {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* 暗色模式调整 */
+.dark .vp-doc,
+.dark .vp-sidebar,
+.dark .vp-nav {
+  background: rgba(30, 30, 30, 0.85) !important;
+}
+</style>
+
 <style scoped>
 .blog-announcement {
   text-align: center;
