@@ -71,3 +71,39 @@ export function getTargetPath(
 ): string {
   return `docs/${category}/${filename}`
 }
+
+// 解析 frontmatter
+export function parseFrontmatter(content: string): {
+  frontmatter: Record<string, string | string[]>
+  body: string
+} {
+  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/)
+  if (!match) {
+    return { frontmatter: {}, body: content }
+  }
+
+  const yamlStr = match[1]
+  const body = match[2]
+  const frontmatter: Record<string, string | string[]> = {}
+
+  for (const line of yamlStr.split('\n')) {
+    const colonIndex = line.indexOf(':')
+    if (colonIndex === -1) continue
+
+    const key = line.slice(0, colonIndex).trim()
+    let value = line.slice(colonIndex + 1).trim()
+
+    // 处理数组 [item1, item2]
+    if (value.startsWith('[') && value.endsWith(']')) {
+      value = value.slice(1, -1)
+      frontmatter[key] = value.split(',').map(item =>
+        item.trim().replace(/^["']|["']$/g, '')
+      ).filter(Boolean)
+    } else {
+      // 移除引号
+      frontmatter[key] = value.replace(/^["']|["']$/g, '')
+    }
+  }
+
+  return { frontmatter, body }
+}

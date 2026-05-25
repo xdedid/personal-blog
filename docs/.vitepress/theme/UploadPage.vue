@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, computed } from 'vue'
 import {
   saveToken,
   getToken,
@@ -11,6 +11,7 @@ import {
   generateFilename,
   generateFullMarkdown,
   getTargetPath,
+  parseFrontmatter,
   type PostFormData
 } from '../utils/markdown-helpers'
 
@@ -33,6 +34,10 @@ function handleClearToken() {
   tokenInput.value = ''
 }
 
+// 文件上传
+const selectedFile = ref<File | null>(null)
+const fileName = ref('')
+
 // 表单
 const form = ref<PostFormData>({
   title: '',
@@ -44,46 +49,80 @@ const form = ref<PostFormData>({
   knowledgeCategory: ''
 })
 
-// Markdown 预览（简单渲染）
-const previewHtml = ref('')
-let previewTimer: ReturnType<typeof setTimeout> | null = null
+// 处理文件选择
+function handleFileSelect(event: Event) {
+  const input = event.target as HTMLInputElement
+  const file = input.files?.[0]
+  if (!file) return
 
-watch(() => form.value.content, (val) => {
-  if (previewTimer) clearTimeout(previewTimer)
-  previewTimer = setTimeout(() => {
-    previewHtml.value = renderMarkdown(val)
-  }, 300)
-}, { immediate: true })
+  selectedFile.value = file
+  fileName.value = file.name
+
+  const reader = new FileReader()
+  reader.onload = (e) => {
+    const content = e.target?.result as string
+    const { frontmatter, body } = parseFrontmatter(content)
+
+    // 从frontmatter提取信息
+    if (frontmatter.title) {
+      form.value.title = frontmatter.title as string
+    } else {
+      // 从文件名提取标题
+      form.value.title = file.name.replace(/\.md$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, '')
+    }
+
+    if (frontmatter.date) {
+      form.value.date = frontmatter.date as string
+    }
+
+    if (frontmatter.tags) {
+      form.value.tags = Array.isArray(frontmatter.tags) ? frontmatter.tags as string[] : []
+    }
+
+    if (frontmatter.description) {
+      form.value.description = frontmatter.description as string
+    }
+
+    if (frontmatter.category) {
+      form.value.knowledgeCategory = frontmatter.category as string
+    }
+
+    form.value.content = body
+  }
+  reader.readAsText(file)
+}
+
+// 清除文件
+function clearFile() {
+  selectedFile.value = null
+  fileName.value = ''
+  form.value.title = ''
+  form.value.content = ''
+  form.value.description = ''
+  form.value.knowledgeCategory = ''
+  form.value.tags = []
+}
+
+// Markdown 预览
+const previewHtml = computed(() => renderMarkdown(form.value.content))
 
 function renderMarkdown(text: string): string {
-  if (!text) return '<p class="preview-placeholder">预览区域</p>'
+  if (!text) return '<p class="preview-placeholder">请上传 .md 文件</p>'
   let html = text
-    // 代码块
     .replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code class="lang-$1">$2</code></pre>')
-    // 行内代码
     .replace(/`([^`]+)`/g, '<code>$1</code>')
-    // 标题
     .replace(/^### (.+)$/gm, '<h3>$1</h3>')
     .replace(/^## (.+)$/gm, '<h2>$1</h2>')
     .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-    // 粗体和斜体
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    // 链接
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
-    // 图片
     .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" />')
-    // 无序列表
     .replace(/^- (.+)$/gm, '<li>$1</li>')
-    // 有序列表
     .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
-    // 引用
     .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
-    // 分割线
     .replace(/^---$/gm, '<hr />')
-    // 段落（连续两个换行）
     .replace(/\n\n/g, '</p><p>')
-    // 单换行
     .replace(/\n/g, '<br />')
 
   return `<p>${html}</p>`
@@ -96,9 +135,10 @@ const status = ref<{ type: 'success' | 'error'; message: string; url?: string } 
 // 验证
 function validate(): string | null {
   if (!getToken()) return '请先配置 GitHub Token'
-  if (!form.value.title.trim()) return '请输入标题'
-  if (!form.value.content.trim()) return '请输入内容'
-  if (!form.value.date) return '请选择日期'
+  if (!selectedFile.value) return '请先上传 .md 文件'
+  if (!form.value.title.trim()) return '文件缺少标题'
+  if (!form.value.content.trim()) return '文件内容为空'
+  if (!form.value.date) return '文件缺少日期'
   if (form.value.category === 'knowledge' && !form.value.knowledgeCategory?.trim()) {
     return '请输入知识库分类'
   }
@@ -136,11 +176,7 @@ async function handleSubmit() {
         message: '文档发布成功！GitHub Actions 将自动部署。',
         url: result.url
       }
-      // 重置表单
-      form.value.title = ''
-      form.value.content = ''
-      form.value.description = ''
-      form.value.knowledgeCategory = ''
+      clearFile()
     } else {
       status.value = { type: 'error', message: result.error || '发布失败' }
     }
@@ -194,6 +230,29 @@ async function handleSubmit() {
     <section class="upload-card">
       <h2 class="card-title">发布新文档</h2>
 
+      <!-- 文件上传 -->
+      <div class="form-group">
+        <label class="form-label">选择文件 *</label>
+        <div class="file-upload-area">
+          <input
+            type="file"
+            accept=".md"
+            @change="handleFileSelect"
+            class="file-input"
+            id="file-input"
+          />
+          <label for="file-input" class="file-label">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            <span>{{ fileName || '点击选择 .md 文件' }}</span>
+          </label>
+          <button v-if="fileName" class="btn btn-ghost btn-sm" @click="clearFile">清除</button>
+        </div>
+      </div>
+
       <!-- 类型选择 -->
       <div class="form-group">
         <label class="form-label">分类类型</label>
@@ -233,17 +292,10 @@ async function handleSubmit() {
         <input v-model="form.description" type="text" class="form-input" placeholder="简短描述" />
       </div>
 
-      <!-- 编辑器 + 预览 -->
-      <div class="form-group editor-group">
-        <label class="form-label">内容</label>
-        <div class="editor-container">
-          <textarea
-            v-model="form.content"
-            class="editor-pane"
-            placeholder="Markdown 内容..."
-          ></textarea>
-          <div class="preview-pane" v-html="previewHtml"></div>
-        </div>
+      <!-- 预览 -->
+      <div class="form-group">
+        <label class="form-label">内容预览</label>
+        <div class="preview-pane" v-html="previewHtml"></div>
       </div>
 
       <!-- 提交 -->
@@ -386,6 +438,48 @@ async function handleSubmit() {
   color: #999;
 }
 
+/* 文件上传 */
+.file-upload-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.875rem;
+  color: #555;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px dashed rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+}
+
+.file-label:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.file-label svg {
+  opacity: 0.6;
+}
+
+.btn-sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8rem;
+}
+
 /* 类型选择 */
 .radio-group {
   display: flex;
@@ -415,43 +509,7 @@ async function handleSubmit() {
   color: #fff;
 }
 
-/* 编辑器 */
-.editor-group {
-  margin-bottom: 1.5rem;
-}
-
-.editor-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  min-height: 400px;
-}
-
-.editor-pane {
-  width: 100%;
-  min-height: 400px;
-  padding: 1rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  line-height: 1.7;
-  color: #111;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 8px;
-  resize: vertical;
-  outline: none;
-  transition: border-color 0.2s;
-  box-sizing: border-box;
-}
-
-.editor-pane:focus {
-  border-color: var(--vp-c-brand-1);
-}
-
-.editor-pane::placeholder {
-  color: #999;
-}
-
+/* 预览 */
 .preview-pane {
   padding: 1rem;
   font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif;
@@ -630,12 +688,13 @@ async function handleSubmit() {
     width: 100%;
   }
 
-  .editor-container {
-    grid-template-columns: 1fr;
+  .file-upload-area {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .editor-pane {
-    min-height: 250px;
+  .file-label {
+    justify-content: center;
   }
 
   .preview-pane {
