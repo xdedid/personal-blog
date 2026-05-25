@@ -23,7 +23,7 @@ const recentPosts = posts.slice(0, 3)
       </div>
 
       <div class="footer">
-        <a href="/posts/" class="view-all">查看全部文章</a>
+        <a href="/personal-blog/posts/" class="view-all">查看全部文章</a>
       </div>
     </div>
   </section>

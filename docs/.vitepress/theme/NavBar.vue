@@ -4,9 +4,10 @@ import { ref } from 'vue'
 const isMobileMenuOpen = ref(false)
 
 const navItems = [
-  { text: '首页', link: '/' },
-  { text: '文章', link: '/posts/' },
-  { text: '关于', link: '/about' }
+  { text: '首页', link: '/personal-blog/' },
+  { text: '文章', link: '/personal-blog/posts/' },
+  { text: '知识库', link: '/personal-blog/knowledge/' },
+  { text: '关于', link: '/personal-blog/about' }
 ]
 </script>
 
@@ -21,7 +22,7 @@ const navItems = [
       </nav>
 
       <!-- 右上角头像 -->
-      <a href="/about" class="avatar-link">
+      <a href="/personal-blog/about" class="avatar-link">
         <div class="avatar">
           <span>X</span>
         </div>
