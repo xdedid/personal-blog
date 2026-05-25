@@ -46,7 +46,7 @@ const form = ref<PostFormData>({
   date: new Date().toISOString().slice(0, 10),
   description: '',
   content: '',
-  knowledgeCategory: ''
+  knowledgeCategory: '未分类'
 })
 
 // 处理文件选择
@@ -83,10 +83,6 @@ function handleFileSelect(event: Event) {
       form.value.description = frontmatter.description as string
     }
 
-    if (frontmatter.category) {
-      form.value.knowledgeCategory = frontmatter.category as string
-    }
-
     form.value.content = body
   }
   reader.readAsText(file)
@@ -99,7 +95,6 @@ function clearFile() {
   form.value.title = ''
   form.value.content = ''
   form.value.description = ''
-  form.value.knowledgeCategory = ''
   form.value.tags = []
 }
 
@@ -139,9 +134,6 @@ function validate(): string | null {
   if (!form.value.title.trim()) return '文件缺少标题'
   if (!form.value.content.trim()) return '文件内容为空'
   if (!form.value.date) return '文件缺少日期'
-  if (form.value.category === 'knowledge' && !form.value.knowledgeCategory?.trim()) {
-    return '请输入知识库分类'
-  }
   return null
 }
 
@@ -272,12 +264,6 @@ async function handleSubmit() {
       <div class="form-group">
         <label class="form-label">标题 *</label>
         <input v-model="form.title" type="text" class="form-input" placeholder="文档标题" />
-      </div>
-
-      <!-- 知识库分类 -->
-      <div v-if="form.category === 'knowledge'" class="form-group">
-        <label class="form-label">知识库分类</label>
-        <input v-model="form.knowledgeCategory" type="text" class="form-input" placeholder="如: 前端开发" />
       </div>
 
       <!-- 日期 -->
