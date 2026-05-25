@@ -58,7 +58,7 @@ import PostMeta from './PostMeta.vue'
 }
 
 .post-title a {
-  color: var(--vp-c-text-1);
+  color: #111;
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -69,7 +69,7 @@ import PostMeta from './PostMeta.vue'
 
 .excerpt {
   font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif;
-  color: var(--vp-c-text-2);
+  color: #333;
   margin: 0.75rem 0 1.25rem 0;
   line-height: 1.75;
   font-weight: 300;

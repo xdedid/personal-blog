@@ -243,7 +243,7 @@ function getCategoryCount(category: string): number {
 
 .post-date {
   font-family: 'Source Sans 3', sans-serif;
-  color: var(--vp-c-text-3);
+  color: #555;
   font-size: 0.8rem;
   font-weight: 300;
 }
@@ -258,7 +258,7 @@ function getCategoryCount(category: string): number {
 }
 
 .post-title a {
-  color: var(--vp-c-text-1);
+  color: #111;
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -269,7 +269,7 @@ function getCategoryCount(category: string): number {
 
 .post-description {
   font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif;
-  color: var(--vp-c-text-2);
+  color: #333;
   font-size: 0.95rem;
   font-weight: 300;
   margin: 0 0 0.75rem 0;
@@ -278,7 +278,7 @@ function getCategoryCount(category: string): number {
 
 .post-excerpt {
   font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif;
-  color: var(--vp-c-text-2);
+  color: #333;
   font-size: 0.875rem;
   font-weight: 300;
   line-height: 1.7;

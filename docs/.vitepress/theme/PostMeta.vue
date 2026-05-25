@@ -38,6 +38,7 @@ defineProps<{
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  color: #444;
 }
 
 .meta-item svg {
