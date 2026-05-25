@@ -13,6 +13,11 @@ export interface ApiResult {
   error?: string
 }
 
+export interface FileContent {
+  sha: string
+  content: string
+}
+
 // Token 管理（SSR 安全）
 
 const isBrowser = typeof window !== 'undefined'
@@ -96,6 +101,68 @@ export async function createFile(
 
     const data = await res.json()
     return { success: true, url: data.content.html_url }
+  } catch (err) {
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : '未知错误'
+    }
+  }
+}
+
+export async function getFileContent(
+  config: GitHubConfig,
+  path: string
+): Promise<FileContent | null> {
+  const url = `${API_BASE}/repos/${config.owner}/${config.repo}/contents/${path}?ref=${config.branch}`
+  const res = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${config.token}`,
+      Accept: 'application/vnd.github.v3+json'
+    }
+  })
+  if (res.status === 404) return null
+  if (!res.ok) throw new Error(`GitHub API error: ${res.status}`)
+  const data = await res.json()
+  const decoded = decodeURIComponent(escape(atob(data.content)))
+  return { sha: data.sha, content: decoded }
+}
+
+export async function deleteFile(
+  config: GitHubConfig,
+  path: string,
+  sha: string,
+  message: string
+): Promise<ApiResult> {
+  try {
+    const url = `${API_BASE}/repos/${config.owner}/${config.repo}/contents/${path}`
+    const res = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${config.token}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/vnd.github.v3+json'
+      },
+      body: JSON.stringify({ message, sha, branch: config.branch })
+    })
+
+    if (res.status === 401) {
+      return { success: false, error: 'Token 无效或已过期' }
+    }
+    if (res.status === 403) {
+      return { success: false, error: 'Token 权限不足，需要 repo 写权限' }
+    }
+    if (res.status === 404) {
+      return { success: false, error: '文件不存在' }
+    }
+    if (res.status === 422) {
+      return { success: false, error: 'SHA 不匹配，文件可能已被修改' }
+    }
+    if (!res.ok) {
+      return { success: false, error: `GitHub API 错误: ${res.status}` }
+    }
+
+    const data = await res.json()
+    return { success: true, url: data.commit?.html_url }
   } catch (err) {
     return {
       success: false,

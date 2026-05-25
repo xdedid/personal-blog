@@ -3,6 +3,7 @@ import { createContentLoader } from 'vitepress'
 export interface Post {
   title: string
   url: string
+  path: string
   date: string
   excerpt: string | undefined
   tags: string[]
@@ -19,6 +20,7 @@ export default createContentLoader('posts/*.md', {
       .map(({ url, frontmatter, excerpt }) => ({
         title: frontmatter.title,
         url: `/personal-blog${url}`,
+        path: `docs${url}.md`,
         date: formatDate(frontmatter.date),
         excerpt,
         tags: frontmatter.tags || [],
