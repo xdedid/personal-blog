@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, watch } from 'vue'
 import {
   saveToken,
   getToken,
@@ -10,8 +10,7 @@ import {
   generateSlug,
   generateFilename,
   generateFullMarkdown,
-  getTargetPath,
-  type PostFormData
+  getTargetPath
 } from '../utils/markdown-helpers'
 
 // Token 管理
@@ -34,14 +33,11 @@ function handleClearToken() {
 }
 
 // 表单
-const form = ref<PostFormData>({
+const form = ref({
   title: '',
-  category: 'posts',
-  tags: [],
+  tags: [] as string[],
   date: new Date().toISOString().slice(0, 10),
-  description: '',
-  content: '',
-  knowledgeCategory: ''
+  content: ''
 })
 
 const tagsInput = ref('')
@@ -108,9 +104,6 @@ function validate(): string | null {
   if (!form.value.title.trim()) return '请输入标题'
   if (!form.value.content.trim()) return '请输入内容'
   if (!form.value.date) return '请选择日期'
-  if (form.value.category === 'knowledge' && !form.value.knowledgeCategory?.trim()) {
-    return '请输入知识库分类'
-  }
   return null
 }
 
@@ -129,14 +122,18 @@ async function handleSubmit() {
     const token = getToken()!
     const slug = generateSlug(form.value.title)
     const filename = generateFilename(form.value.date, slug)
-    const targetPath = getTargetPath(form.value.category, filename)
-    const markdown = generateFullMarkdown(form.value)
+    const targetPath = getTargetPath('posts', filename)
+    const markdown = generateFullMarkdown({
+      ...form.value,
+      category: 'posts',
+      description: ''
+    })
 
     const result = await createFile(
       { token, owner: 'xdedid', repo: 'personal-blog', branch: 'main' },
       targetPath,
       markdown,
-      `docs: add ${form.value.category === 'posts' ? 'post' : 'knowledge'} '${form.value.title}'`
+      `docs: add post '${form.value.title}'`
     )
 
     if (result.success) {
@@ -145,11 +142,8 @@ async function handleSubmit() {
         message: '文档发布成功！GitHub Actions 将自动部署。',
         url: result.url
       }
-      // 重置表单
       form.value.title = ''
       form.value.content = ''
-      form.value.description = ''
-      form.value.knowledgeCategory = ''
       tagsInput.value = ''
       form.value.tags = []
     } else {
@@ -205,31 +199,10 @@ async function handleSubmit() {
     <section class="upload-card">
       <h2 class="card-title">发布新文档</h2>
 
-      <!-- 类型选择 -->
-      <div class="form-group">
-        <label class="form-label">分类类型</label>
-        <div class="radio-group">
-          <button
-            :class="['radio-btn', { active: form.category === 'posts' }]"
-            @click="form.category = 'posts'"
-          >文章</button>
-          <button
-            :class="['radio-btn', { active: form.category === 'knowledge' }]"
-            @click="form.category = 'knowledge'"
-          >知识库</button>
-        </div>
-      </div>
-
       <!-- 标题 -->
       <div class="form-group">
         <label class="form-label">标题 *</label>
         <input v-model="form.title" type="text" class="form-input" placeholder="文档标题" />
-      </div>
-
-      <!-- 知识库分类 -->
-      <div v-if="form.category === 'knowledge'" class="form-group">
-        <label class="form-label">知识库分类</label>
-        <input v-model="form.knowledgeCategory" type="text" class="form-input" placeholder="如: 前端开发" />
       </div>
 
       <!-- 标签 -->
@@ -242,12 +215,6 @@ async function handleSubmit() {
       <div class="form-group">
         <label class="form-label">日期</label>
         <input v-model="form.date" type="date" class="form-input" />
-      </div>
-
-      <!-- 描述 -->
-      <div v-if="form.category === 'knowledge'" class="form-group">
-        <label class="form-label">描述</label>
-        <input v-model="form.description" type="text" class="form-input" placeholder="简短描述" />
       </div>
 
       <!-- 编辑器 + 预览 -->
@@ -401,35 +368,6 @@ async function handleSubmit() {
 
 .form-input::placeholder {
   color: #999;
-}
-
-/* 类型选择 */
-.radio-group {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.radio-btn {
-  font-family: 'Source Sans 3', sans-serif;
-  padding: 0.5rem 1.25rem;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 8px;
-  background: transparent;
-  color: #555;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.radio-btn:hover {
-  border-color: var(--vp-c-brand-1);
-  color: var(--vp-c-brand-1);
-}
-
-.radio-btn.active {
-  background: var(--vp-c-brand-1);
-  border-color: var(--vp-c-brand-1);
-  color: #fff;
 }
 
 /* 编辑器 */
